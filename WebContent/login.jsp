@@ -25,7 +25,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar brand" href="main.jsp" contenteditable="true" text-color="red">JSP 게시판 웹 사이트</a>
+			<a class="navbar brand" href="main.jsp" >JSP 게시판 웹 사이트</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
@@ -34,13 +34,11 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-has></a>				
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"></a>				
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<script src="https://code.jquery.com/jquery-3.2.2.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	
 </body>
 </html>
