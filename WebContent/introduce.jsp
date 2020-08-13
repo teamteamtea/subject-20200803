@@ -15,16 +15,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
- 
 </head>
 <body>
-
 <style type="text/css">
 .jumbotron{
+
 background-image:url("C:\tempfiles\27\다운로드.jpg");
 background-size:cover;
 text-shadow:black 0.2em 0.2em 0.2em;
-color:white;
+color:black;
 }
 
 </style>
@@ -37,7 +36,7 @@ color:white;
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">게시글 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"></a>
@@ -53,7 +52,7 @@ color:white;
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">made by 박종휘</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -62,27 +61,23 @@ color:white;
     </form>
   </div>
 </nav>
-
- <div class="container">
-	<div class="col"></div>
-		<div class="col">
-			<div class="jumbotron" style="padding-top: 20px;" align="center">
-			<form action="${pageContext.request.contextPath }/logins" method="post">
-				<h2 style ="text-align:center">로그인 화면</h2>
-				<div class="form-group">
-					아이디:<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
-				</div>
-				<div class="form-group">
-					비번:<input type="password" class="form-control" placeholder="비밀번호" name="userPW" maxlength="20">
-				</div>
-				<input type="submit" class="btn btn-primary form-control" value="로그인">
-			</form>
-			</div>		
-		</div>
-	<div class="col"></div>
+<div class="jumbotron" id="jumbo1">
+	<h1>사이트 소개</h1>
+	<hr/>
+	<h3 class="alert alert-primary"><b>1.이 사이트를 만든이유?</b></h3>
+	<p class="alert alert-light">이 사이트는 강의를 들을수 있고 다양한 의견을 수용하기 위해서 만들었습니다.</p>
 	</div>
-	<a href="join.jsp"><h2>회원가입이 안되었다면 여기를 눌러주세요.</h2></a>
-	
+	<hr/>
+	<div class="jumbotron" id="jumbo2">
+	<h3 class="alert alert-primary"><b>2.이 사이트의 개요?</b></h3>
+	<p class="alert alert-light">선생님 께서 과제를 내주셨기에 어떻게 만들면 좋고 어떤 주제로 만들까 고민을 하다가 <br/>
+	이 사이트를 만들게 되었습니다.</p>
+	</div>
+	<hr/>
+	<div class="jumbotron" id="jumbo3">
+	<h3 class="alert alert-primary"><b>3.이 사이트의 목록</b></h3>
+	<p class="alert alert-light">강의보기 , 게시판 등 이 있습니다.</p>
+	</div>
 	<footer style="background-color:#000000; color:#ffffff">
 	<div class="container">
 		<div class="row">
@@ -90,25 +85,15 @@ color:white;
 				<h5>만든사람 &copy; 2020</h5><h5>익명이 아닌 박종휘</h5>
 			</div>
 			<div class="col-sm-4"><h5>만든사람 소개</h5><p>저는 익명이 아닌 사람중 하나 입니다. 그냥 아무것도 없고 크게 목표도 없이 코딩할려고 왔는데 되게 어렵네요..</p></div>
-			<div class="col-sm-2"><h5 style="text-align:center;">네비게이션</h5>
+			<div class="col-sm-2"><h5 style="text-align:center;">사이트소개</h5>
 				<div class="list-group">
-				<a href="#" class="list-group-item">소개</a>
-				<a href="#" class="list-group-item">강사소개</a>
+				<a href="introduce.jsp" class="list-group-item">소개</a>
+				<a href="teacher.jsp" class="list-group-item">강사소개</a>
 				
 				</div>	
 			</div>
 		</div>
 	</div>
-</footer> 	
-
-
+</footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
