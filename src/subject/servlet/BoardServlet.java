@@ -21,42 +21,46 @@ import user.BoardList;
 @WebServlet("/boards")
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BoardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public BoardServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param bdate 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-	
-    	request.setCharacterEncoding("utf-8");
-		boardDao dao =new boardDao();
-		HttpSession session =request.getSession();
-		String uname =request.getParameter("uname");
-		String utext =request.getParameter("utext");
-		String btext=request.getParameter("boardtext");
-		//Board test = new Board("이름","제목","내용",LocalDateTime.now());
-		BoardList board =new BoardList(0, uname,utext,btext,LocalDateTime.now());
-		
-		if(uname!=null || utext!=null || btext!=null) {
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
+	}
+
+	/**
+	 * @param bdate
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("utf-8");
+		boardDao dao = new boardDao();
+		HttpSession session = request.getSession();
+		String uname = request.getParameter("uname");
+		String utext = request.getParameter("utext");
+		String btext = request.getParameter("boardtext");
+		// Board test = new Board("이름","제목","내용",LocalDateTime.now());
+		BoardList board = new BoardList(0, uname, utext, btext, LocalDateTime.now());
+
+		if (uname != null || utext != null || btext != null) {
 			Object names = null;
 			try {
 				names = dao.insert(board);
@@ -64,30 +68,30 @@ public class BoardServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("board",board );
+			request.setAttribute("board", board);
+
+		}
+		if (board != null) {
 			
-		}
-		if(board!=null) {
-			Object i=null;
-			try {
-				i=dao.select(board);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Object i = null;
+				try {
+					i = dao.select(board);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				request.setAttribute("select", i);
 			}
-			request.setAttribute("select", i);
-		}
-		if(request.getAttribute("select")!=null) {
-			Object p =dao.update(board);
-			session.setAttribute("update", p);
-		}
-		
-		
-		
-		
-		
-		RequestDispatcher dispatcher =request.getRequestDispatcher("/BoardMain.jsp");
+			
+		RequestDispatcher dispatcher =	request.getRequestDispatcher("/BoardMain.jsp");
 		dispatcher.forward(request, response);
-	  
+		}
+		
+
+	
+	
+
+		
+
 	}
-}
+

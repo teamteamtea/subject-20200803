@@ -81,7 +81,7 @@ color:white;
 		</div>
 		<div class="col-md-4">
 			<h4>이곳의 세번째특징입니다.</h4>
-			<p>이곳은 개인의 생각을 적을수 있고   재미있는 사이트입니다.</p>	
+			<p>이곳은 개인의 생각을 적을수 있고   자신의 존재를 밝혀야만 사용할수있는 사이트입니다.</p>	
 			<p><a class="btn btn-default"  href=""></a></p>	
 		</div>
 	</div>
@@ -147,6 +147,7 @@ color:white;
     </ul>
    
   </div>
+  
 </nav>
 <div class="container">
 	<div class="jumbotron">
@@ -167,7 +168,7 @@ color:white;
 		</div>
 		<div class="col-md-4">
 			<h4>이곳의 세번째특징입니다.</h4>
-			<p>이곳은 개인의 생각을 적을수 있고 서로 답변해 줄수 있는 사이트입니다.</p>	
+			<p>이곳은 개인의 생각을 적을수 있고 자신의 존재를 밝혀야만 사용할수있는 사이트입니다.</p>	
 			<p><a class="btn btn-default"  href=""></a></p>	
 		</div>
 	</div>

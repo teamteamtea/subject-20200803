@@ -27,6 +27,7 @@ public class BoardList {
 	}
 	public void setTno(int tno) {
 		this.tno=tno;
+	
 	}
 	
 	public String getUname() {

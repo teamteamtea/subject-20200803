@@ -1,8 +1,8 @@
 package subject.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,23 +13,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
-import com.sun.jndi.url.rmi.rmiURLContext;
-
-import dao.boardDao;
-import user.BoardList;
+import dao.CommentDao;
+import dao.ReplyDao;
+import user.Comment;
+import user.Reply;
 
 /**
- * Servlet implementation class DeleteServlet
+ * Servlet implementation class ReplyServlet
  */
-@WebServlet("/deletes")
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/reply")
+public class ReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteServlet() {
+    public ReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,39 +39,41 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//String uname=(String) request.getAttribute("deletebtn");
 		request.setCharacterEncoding("utf-8");
+		String replycomment =request.getParameter("replycomment");
+		System.out.println("replycomment="+replycomment);
 		
-		String deleteno =request.getParameter("tno");
-		System.out.println("deleteno"+deleteno);
-		boardDao dao =new boardDao();
-
-		BoardList list= new BoardList(0,request.getParameter("uname"),request.getParameter("utext"),request.getParameter("btext"),LocalDateTime.now());
-
-		if(list!=null){
-		int delete =dao.delete(list,deleteno);
-
+		//BoardList list =new BoardList(0, request.getParameter("uname"), request.getParameter("utext"), request.getParameter("btext"), LocalDateTime.now());
+		Reply re = new Reply(0,request.getParameter("uname"), replycomment, Timestamp.valueOf(LocalDateTime.now()));
+		System.out.println(request.getParameter("uname"));
+		ReplyDao dao = new ReplyDao();
+		
+		
+		if(re!=null) {
+			
+			try {
+				int result= dao.insert(re);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
-
-		RequestDispatcher dispatcher =request.getRequestDispatcher("/boards");
-		dispatcher.forward(request, response);
 		
-		/*RequestDispatcher dispatcher =request.getRequestDispatcher("/BoardMain.jsp");
-		dispatcher.forward(request, response);*/
+			List<Reply> reply=dao.select();
+			
+			request.setAttribute("reply", reply);
+		
+		
+		RequestDispatcher dispatcher =request.getRequestDispatcher("/lecture.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
-
-
-
-
-
-

@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import jdbc.jdbcUtil;
 import jdbc.connection.ConnectionProvider;
-import user.User;
+import user.*;
 import util.databaseUtil;
 
 public class userDao {
@@ -23,29 +23,30 @@ public class userDao {
 
 	}
 
-	public int login(String userID, String userPW) {
+	public User2 login(String userID, String userPW) {
 
-		String sql = "SELECT userPW FROM user WHERE userID = ? ";
+		String sql = "SELECT * FROM user WHERE userID = ? ";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				if(rs.getString(1).equals(userPW)) {
-				return 1;//로그인성공
+				if(rs.getString(2).equals(userPW)) {
+					
+					return new User2(rs.getString(1), rs.getString(3));//로그인성공
 			   }else {
-					return 0;//비밀번호 불일치
+					return null;//비밀번호 불일치
 				}
 				
 			}
-			return -1;//아이디가없음
+			return null;//아이디가없음
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			jdbcUtil.close(conn);
 		}
 
-		return -2;
+		return null;
 		// 데이터베이스 오류
 	}
 

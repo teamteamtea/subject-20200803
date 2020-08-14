@@ -18,5 +18,13 @@
 </head>
 <body>
 
+<h3>답글</h3><br/>
+<form action="${pageContext.request.contextPath }/reply" method="get">
+<input type="text" name="rname" id="" hidden="hidden" value="${dblogin.userName }"/>
+<textarea rows="5" cols="80" name="replycomment"></textarea>
+<input type="submit" value="답글"  />
+<input type="reset"  value="다시쓰기"/>
+
+</form>
 </body>
 </html>

@@ -5,13 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import jdbc.jdbcUtil;
 import user.BoardList;
+import user.User;
 import util.databaseUtil;
 
 public class boardDao {
@@ -77,7 +76,7 @@ public class boardDao {
 		//데이터 베이스 오류
 	}
 	
-	public String update(BoardList board ) {
+	public int update(BoardList board, String tno) {
 		
 		String sql="UPDATE board SET uname=?,utext=?,board_text=? WHERE nono=?";
 		
@@ -86,12 +85,12 @@ public class boardDao {
 			pstmt.setString(1, board.getUname());
 			pstmt.setString(2, board.getUtext());
 			pstmt.setString(3, board.getBtext());
-			pstmt.setInt(4, board.getTno());
-			pstmt.executeUpdate();
+			pstmt.setInt(4,Integer.parseInt(tno));
+			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 	
 	public BoardList boardadd(ResultSet rs,BoardList board) throws SQLException {
@@ -102,18 +101,18 @@ public class boardDao {
 		//return new BoardList(rs.getString("uname"),rs.getString("utext"),rs.getString("board_text"), LocalDateTime.now());
 	}
 	
-	public String delete(BoardList board) {
+	public int delete(BoardList board,String tno) {
 		
 		String sql="delete from board where nono=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,board.getTno());
-			pstmt.executeUpdate();
+			pstmt.setInt(1,Integer.parseInt(tno));
+			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 	
 	public int select2(BoardList list) {
@@ -169,24 +168,33 @@ public class boardDao {
 		}
 	}
 	
-	public List<BoardList> search(BoardList b){
+	public List<BoardList> search(String menu,String word, BoardList b){
 		
 		Connection conn=databaseUtil.getconnection();
 		PreparedStatement pstmt=null;
-		String search="";
+		
+		
 		
 		try {
-			String sql="SELECT * FROM board WHERE ? LIKE '%?%'";
+			String sql="SELECT * FROM board WHERE "+menu+" LIKE ?";
 			pstmt=conn.prepareStatement(sql);
 			
-			//pstmt.setString(1, );
-			pstmt.setString(2, "%" +search+ "%");
-			pstmt.executeUpdate();
+			
+			pstmt.setString(1, "%" +word+ "%");
+			rs=pstmt.executeQuery();
+			
+			List<BoardList> result = new ArrayList<BoardList>();
+			
+			while(rs.next()) {
+				result.add(boardadd(rs, b));
+			}
+			return result;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			jdbcUtil.close(pstmt);
-			jdbcUtil.close(rs);
+
 		}
 		return null;
 	}

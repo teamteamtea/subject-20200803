@@ -3,7 +3,7 @@
   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
 </head>
 <body>
 <c:if test="${not empty dblogin }">
@@ -87,6 +88,53 @@ color:white;
 </div>
 </div>
 <hr>
+
+<left>
+<h2> 댓글작성 </h2> 
+ <form action="${pageContext.request.contextPath }/comment" method="get" >
+ <input type="text" name="uname" id="" hidden="hidden" value="${dblogin.userName }"/>
+<textarea rows="5" cols="120" name="ucomment"></textarea>
+			<input type = "submit" value = "글쓰기" > &nbsp;&nbsp;
+            <input type = "reset" value = "다시작성"> &nbsp;&nbsp;
+</form>
+<hr/>
+</left>
+
+<center><a href="http://localhost:8888/subject/comment?uname=seoul&ucomment=">댓글목록보기</a> </center>
+
+
+	<table class="table table-hover" width="100px" >
+	<thead>
+		<tr>
+			<th>댓글</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:forEach var="comment" items="${comment }">
+		<tr class="hide">
+			<td><h2>${comment.ucomment}</h2><br/> <a href="reply.jsp">답글 </a>
+			
+		</tr>
+</c:forEach>
+		</tbody>
+	</table>
+
+<div align ="right">
+<table class="table table-hover" width="100px" >
+	<thead>
+		<tr>
+			<th>댓글</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:forEach var="reply" items="${reply }">
+		<tr class="hide">
+			<td><h2>${reply.replycomment}</h2><br/> 
+		</tr>
+		</tbody>
+</c:forEach>
+</div>
+
 <footer style="background-color:#000000; color:#ffffff">
 	<div class="container">
 		<div class="row">
@@ -141,6 +189,7 @@ color:white;
   </div>
 </nav>
 <hr/>
+	<c:if test="${empty dblogin }">
 	<div class="container">
 		<div class="rows">
 			<div class="jumbotron">
@@ -148,6 +197,7 @@ color:white;
 			</div>
 		</div>
 	</div>
+</c:if>
 	<footer style="background-color:#000000; color:#ffffff">
 	<div class="container">
 		<div class="row">
@@ -166,5 +216,6 @@ color:white;
 	</div>
 </footer>
 </c:if>
+
 </body>
 </html>
